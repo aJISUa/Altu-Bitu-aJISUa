@@ -49,7 +49,7 @@ int main() {
         int a;
         cin >> a;
 
-        int diff = abs(s-a);
+        int diff = abs(a-s);
         d = getGcdIter(d, diff); // 최대공약수
     }
     cout << d << "\n";
