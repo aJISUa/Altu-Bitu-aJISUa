@@ -20,7 +20,7 @@
 총 K번 회전시킨 이후에 12시방향이 S극인 톱니바퀴의 개수를 출력한다.
 */
 #include <iostream>
-#include <deque>
+#include <deque> // deque는 양쪽 끝에서 삽입/삭제 가능 -> 회전 구현에 유리
 #include <vector>
 
 using namespace std;
@@ -54,6 +54,8 @@ int main() {
         // 왼쪽으로 연쇄
         for (int i = num; i > 0; i--) {
             // gears[i-1]의 3시(인덱스2) vs gears[i]의 9시(인덱스6)
+
+            // 회전 결정은 회전 전 상태 기준이므로, 아직 회전 적용 전의 상태로 비교
             if (gears[i-1][2] != gears[i][6]) { // 맞닿은 부분이 다르면 회전
                 rot[i-1] = -rot[i]; // 반대 방향으로 회전
             } else {
@@ -61,7 +63,7 @@ int main() {
             }
         }
 
-        // 오른쪽으로 연쇄
+        // 오른쪽으로 연쇄 <- 왼쪽과 같은 원리
         for (int i = num; i < T - 1; i++) {
             if (gears[i][2] != gears[i+1][6]) { // 맞닿은 부분이 다르면 회전
                 rot[i+1] = -rot[i]; // 반대 방향으로 회전
